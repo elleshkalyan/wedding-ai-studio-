@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#211719">
+<title>Wedding AI Studio — Create Your Wedding Story</title>
+<style>
+:root{--ink:#24191b;--wine:#51252f;--gold:#c6a46a;--cream:#fbf7ef;--muted:#786b63;--line:#eadfce}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}button,select,input,textarea{font:inherit}
+.top{background:#211719;color:#fff;padding:14px 5vw;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:5;border-bottom:1px solid #473338}
+.brand{font-family:Georgia,serif;font-size:20px;letter-spacing:2px;color:#e6ca91;font-weight:bold}.brand span{display:block;font:10px system-ui;letter-spacing:3px;color:#d8c9bb;margin-top:3px}
+nav{display:flex;gap:22px;align-items:center;font-size:13px;color:#f2e9df}nav a:hover{color:#e6ca91}
+select{border:1px solid #b99b6d;background:#2e2224;color:#fff;padding:9px 10px;border-radius:9px}
+.hero{background:radial-gradient(circle at 80% 30%,#754c4b 0,#39262b 32%,#211719 72%);color:#fff;padding:70px 6vw 62px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:440px}
+.eyebrow{color:#e3c58a;text-transform:uppercase;letter-spacing:3px;font-size:11px;font-weight:700}
+h1{font:clamp(38px,5vw,66px)/1.06 Georgia,serif;margin:17px 0;color:#fff;max-width:650px}
+.hero p{color:#e6d9d1;line-height:1.7;max-width:560px;font-size:16px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{border:0;border-radius:999px;padding:13px 21px;background:linear-gradient(135deg,#e6cb95,#b78c4f);color:#25191b;font-weight:750;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:8px}
+.btn.secondary{background:transparent;border:1px solid #c6a46a;color:#f7e9ce}.btn.dark{background:#352126;color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}
+.hero-art{min-height:300px;border:1px solid #92734e;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(135deg,rgba(22,12,14,.05),rgba(22,12,14,.7)),radial-gradient(circle at 50% 30%,#d9b984,#8b5550 40%,#2a1b20 75%);display:flex;align-items:end;padding:25px;box-shadow:0 24px 70px #100b0c80}
+.hero-art:before{content:"";position:absolute;inset:18px;border:1px solid #e5c88c88;border-radius:14px}
+.hero-art .artcopy{position:relative;text-align:center;width:100%;padding:15px;color:#fff}.artcopy small{letter-spacing:4px;color:#f1dba9}.artcopy strong{display:block;font:clamp(25px,4vw,43px) Georgia,serif;margin:10px 0}.artcopy em{font:italic 14px Georgia;color:#f5e6d1}
+section{padding:58px 6vw}.section-head{text-align:center;max-width:720px;margin:0 auto 30px}.section-head .eyebrow{color:#987344}.section-head h2{font:clamp(29px,4vw,42px) Georgia,serif;margin:10px 0}.section-head p{color:var(--muted);line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #3c24100b}
+.card-art{height:150px;display:grid;place-items:center;color:#fff;text-align:center;padding:15px;font:22px Georgia,serif;position:relative}
+.card-art:after{content:"";position:absolute;inset:10px;border:1px solid #ffffff88;border-radius:9px}
+.art1{background:radial-gradient(circle at 50% 30%,#b98c61,#612e37 70%)}.art2{background:radial-gradient(circle at 50% 30%,#d8c3a1,#78816b 70%)}.art3{background:radial-gradient(circle at 50% 30%,#d4a3a0,#342c48 75%)}.art4{background:radial-gradient(circle at 50% 30%,#c8a86e,#242126 75%)}
+.card-body{padding:15px}.card-body h3{margin:0 0 6px;font:19px Georgia,serif}.card-body p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.studio{background:#f1e9dc}.studio-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 35px #3c24100b}
+.panel h3{font:24px Georgia,serif;margin:0 0 8px}.hint{color:var(--muted);font-size:13px;line-height:1.55;margin:0 0 17px}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 7px}
+input[type=file],input[type=text],textarea{width:100%;padding:12px;border:1px solid #dfd3c3;border-radius:10px;background:#fff;color:var(--ink)}
+textarea{min-height:85px;resize:vertical}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.controls select{background:#fff;color:var(--ink);border:1px solid #dfd3c3;width:100%}
+.preview{min-height:390px;background:#2c2022;border-radius:15px;display:grid;place-items:center;overflow:hidden;position:relative;color:#e8d9c7;text-align:center;padding:20px}
+.preview img{display:none;max-width:100%;max-height:520px;object-fit:contain}
+.preview .placeholder{max-width:260px;line-height:1.6;color:#d7c8b9}.preview .overlay{position:absolute;bottom:25px;left:15px;right:15px;color:#fff;text-shadow:0 2px 8px #000;font:28px Georgia,serif;pointer-events:none}
+.smallnote{font-size:11px;color:var(--muted);line-height:1.5;margin-top:12px}
+.feature-row{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.feature{padding:20px;border:1px solid var(--line);border-radius:15px;background:#fff}.feature b{font:20px Georgia,serif}.feature p{font-size:13px;color:var(--muted);line-height:1.55}
+footer{background:#211719;color:#e9dccc;padding:35px 6vw;text-align:center}footer strong{color:#e6ca91;font:22px Georgia,serif;letter-spacing:2px}footer p{font-size:12px;color:#c9b8aa}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:48px}.hero-art{min-height:260px}.cards{grid-template-columns:repeat(2,1fr)}.studio-grid{grid-template-columns:1fr}nav{gap:12px}.feature-row{grid-template-columns:1fr}}
+@media(max-width:560px){.top{flex-wrap:wrap;padding:12px 4vw}.brand{font-size:17px}nav{order:3;width:100%;overflow:auto;padding:5px 0}nav a{white-space:nowrap}.hero{padding:45px 5vw}.cards{gap:10px}.card-art{height:120px}section{padding:43px 5vw}.panel{padding:16px}.preview{min-height:300px}.controls{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#home">WEDDING AI STUDIO<span>YOUR WEDDING. YOUR STORY.</span></a>
+  <nav><a href="#home" data-i="home">Home</a><a href="#templates" data-i="templates">Templates</a><a href="#studio" data-i="photo">AI Photo Studio</a><a href="#forpros" data-i="pros">For Professionals</a></nav>
+  <select id="language" aria-label="Choose language">
+    <option value="en">English</option><option value="te">తెలుగు</option><option value="hi">हिन्दी</option><option value="ta">தமிழ்</option><option value="kn">ಕನ್ನಡ</option><option value="ml">മലയാളം</option><option value="mr">मराठी</option><option value="bn">বাংলা</option><option value="ur">اردو</option><option value="gu">ગુજરાતી</option><option value="pa">ਪੰਜਾਬੀ</option>
+  </select>
+</header>
+<main>
+<section class="hero" id="home">
+  <div><div class="eyebrow" data-i="eyebrow">A creative studio for every celebration</div>
+    <h1 data-i="headline">Create a wedding story worth remembering.</h1>
+    <p data-i="intro">Design beautiful wedding invitations, explore photo concepts and build memorable visuals — made for couples, photographers and videographers.</p>
+    <div class="actions"><a class="btn" href="#templates" data-i="explore">Explore free templates</a><a class="btn secondary" href="#studio" data-i="start">Open Photo Studio</a></div>
+  </div>
+  <div class="hero-art"><div class="artcopy"><small>THE CELEBRATION BEGINS</small><strong>Forever Starts Here</strong><em>Beautiful moments. Beautifully told.</em></div></div>
+</section>
+<section id="templates">
+  <div class="section-head"><div class="eyebrow" data-i="curated">Curated for every style</div><h2 data-i="templateTitle">Find your invitation style</h2><p data-i="templateIntro">Start with a look you love. These sample styles are free design inspiration for your next creation.</p></div>
+  <div class="cards">
+    <article class="card"><div class="card-art art1">Royal Heritage</div><div class="card-body"><h3 data-i="royal">Royal & Traditional</h3><p data-i="royalDesc">Rich jewel tones, ornate borders and timeless details.</p></div></article>
+    <article class="card"><div class="card-art art2">Garden Romance</div><div class="card-body"><h3 data-i="floral">Floral & Romantic</h3><p data-i="floralDesc">Soft florals, pastel palettes and delicate layouts.</p></div></article>
+    <article class="card"><div class="card-art art3">Modern Love</div><div class="card-body"><h3 data-i="modern">Modern Minimal</h3><p data-i="modernDesc">Clean typography and contemporary elegance.</p></div></article>
+    <article class="card"><div class="card-art art4">Golden Moments</div><div class="card-body"><h3 data-i="cinematic">Cinematic Luxury</h3><p data-i="cinematicDesc">Dramatic lighting and premium editorial style.</p></div></article>
+  </div>
+</section>
+<section class="studio" id="studio">
+  <div class="section-head"><div class="eyebrow" data-i="creative">Your creative workspace</div><h2 data-i="studioTitle">AI Photo Studio — Starter</h2><p data-i="studioIntro">Upload a photo, add a couple's names and preview a polished wedding-style treatment. This starter runs in your browser.</p></div>
+  <div class="studio-grid">
+    <div class="panel">
+      <h3 data-i="make">Create your preview</h3><p class="hint" data-i="makeHint">Choose a photo and style. Your original image stays on your device while you work.</p>
+      <label data-i="upload">Upload a wedding photo</label><input id="photoInput" type="file" accept="image/*">
+      <div class="controls">
+        <div><label data-i="style">Photo style</label><select id="style"><option value="warm">Warm golden</option><option value="soft">Soft romantic</option><option value="classic">Classic elegant</option><option value="mono">Black & white</option></select></div>
+        <div><label data-i="format">Export format</label><select id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option></select></div>
+      </div>
+      <label data-i="names">Couple names / title</label><input id="names" type="text" maxlength="60" placeholder="Aarav & Ananya">
+      <label data-i="date">Wedding date or message</label><input id="date" type="text" maxlength="70" placeholder="Save the Date • 12 February 2027">
+      <div class="actions"><button class="btn dark" id="apply" disabled data-i="apply">Apply style</button><button class="btn" id="download" disabled data-i="download">Download preview</button></div>
+      <p class="smallnote" data-i="disclaimer">Note: This is a free browser-based starter editor with photo filters and text overlay, not a connected generative AI model yet. Real AI generation will be added later through an API with usage limits.</p>
+    </div>
+    <div class="panel"><h3 data-i="preview">Live preview</h3><p class="hint" data-i="previewHint">Your selected photo will appear here.</p>
+      <div class="preview" id="preview"><div class="placeholder" id="placeholder">✦<br><br>Upload a photo to begin your wedding design preview.</div><img id="previewImg" alt="Wedding photo preview"><div class="overlay" id="overlay"></div></div>
+    </div>
+  </div>
+</section>
+<section id="forpros">
+  <div class="section-head"><div class="eyebrow" data-i="built">Built for the wedding community</div><h2 data-i="prosTitle">One creative space. Many possibilities.</h2><p data-i="prosIntro">A future-ready workspace for everyone — from couples planning a celebration to studios delivering client work.</p></div>
+  <div class="feature-row">
+    <div class="feature"><b data-i="couples">For couples</b><p data-i="couplesDesc">Create invitation concepts, personalize names and dates, and share your celebration.</p></div>
+    <div class="feature"><b data-i="photogs">For photographers</b><p data-i="photogsDesc">Explore portrait treatments, client previews and wedding design inspiration.</p></div>
+    <div class="feature"><b data-i="videogs">For videographers</b><p data-i="videogsDesc">Discover teaser concepts, title-card ideas and social video creative directions.</p></div>
+  </div>
+</section>
+</main>
+<footer><strong>WEDDING AI STUDIO</strong><p data-i="footer">Made for beautiful celebrations — couples, photographers, videographers and creators.</p><p>© <span id="year"></span> Wedding AI Studio</p></footer>
+<script>
+const translations={
+en:{home:"Home",templates:"Templates",photo:"AI Photo Studio",pros:"For Professionals",eyebrow:"A creative studio for every celebration",headline:"Create a wedding story worth remembering.",intro:"Design beautiful wedding invitations, explore photo concepts and build memorable visuals — made for couples, photographers and videographers.",explore:"Explore free templates",start:"Open Photo Studio",curated:"Curated for every style",templateTitle:"Find your invitation style",templateIntro:"Start with a look you love. These sample styles are free design inspiration for your next creation.",royal:"Royal & Traditional",royalDesc:"Rich jewel tones, ornate borders and timeless details.",floral:"Floral & Romantic",floralDesc:"Soft florals, pastel palettes and delicate layouts.",modern:"Modern Minimal",modernDesc:"Clean typography and contemporary elegance.",cinematic:"Cinematic Luxury",cinematicDesc:"Dramatic lighting and premium editorial style.",creative:"Your creative workspace",studioTitle:"AI Photo Studio — Starter",studioIntro:"Upload a photo, add a couple's names and preview a polished wedding-style treatment. This starter runs in your browser.",make:"Create your preview",makeHint:"Choose a photo and style. Your original image stays on your device while you work.",upload:"Upload a wedding photo",style:"Photo style",format:"Export format",names:"Couple names / title",date:"Wedding date or message",apply:"Apply style",download:"Download preview",disclaimer:"Note: This is a free browser-based starter editor with photo filters and text overlay, not a connected generative AI model yet. Real AI generation will be added later through an API with usage limits.",preview:"Live preview",previewHint:"Your selected photo will appear here.",built:"Built for the wedding community",prosTitle:"One creative space. Many possibilities.",prosIntro:"A future-ready workspace for everyone — from couples planning a celebration to studios delivering client work.",couples:"For couples",couplesDesc:"Create invitation concepts, personalize names and dates, and share your celebration.",photogs:"For photographers",photogsDesc:"Explore portrait treatments, client previews and wedding design inspiration.",videogs:"For videographers",videogsDesc:"Discover teaser concepts, title-card ideas and social video creative directions.",footer:"Made for beautiful celebrations — couples, photographers, videographers and creators."},
+te:{home:"హోమ్",templates:"టెంప్లేట్లు",photo:"AI ఫోటో స్టూడియో",pros:"ప్రొఫెషనల్స్",eyebrow:"ప్రతి వేడుకకు క్రియేటివ్ స్టూడియో",headline:"గుర్తుండిపోయే పెళ్లి కథను సృష్టించండి.",intro:"అందమైన పెళ్లి ఆహ్వానాలు, ఫోటో ఐడియాలు, ప్రత్యేక డిజైన్లు — జంటలు, ఫోటోగ్రాఫర్లు, వీడియోగ్రాఫర్ల కోసం.",explore:"ఉచిత టెంప్లేట్లు చూడండి",start:"ఫోటో స్టూడియో తెరవండి",curated:"ప్రతి స్టైల్ కోసం",templateTitle:"మీ ఆహ్వాన స్టైల్ ఎంచుకోండి",templateIntro:"మీకు నచ్చిన డిజైన్‌తో ప్రారంభించండి. ఇవి ఉచిత డిజైన్ నమూనాలు.",royal:"రాయల్ & సంప్రదాయ",royalDesc:"అందమైన రంగులు, సంప్రదాయ అలంకరణలు.",floral:"పూల & రొమాంటిక్",floralDesc:"మృదువైన పూల డిజైన్లు, పాస్టెల్ రంగులు.",modern:"మోడ్రన్ మినిమల్",modernDesc:"సింపుల్ టైపోగ్రఫీ, ఆధునిక అందం.",cinematic:"సినిమాటిక్ లగ్జరీ",cinematicDesc:"డ్రామాటిక్ లైటింగ్, ప్రీమియం స్టైల్.",creative:"మీ క్రియేటివ్ వర్క్‌స్పేస్",studioTitle:"AI ఫోటో స్టూడియో — ప్రారంభ వెర్షన్",studioIntro:"ఫోటో అప్‌లోడ్ చేసి, జంట పేర్లు జోడించి, వెడ్డింగ్ స్టైల్ ప్రివ్యూ చూడండి.",make:"మీ ప్రివ్యూ తయారుచేయండి",makeHint:"ఫోటో, స్టైల్ ఎంచుకోండి. మీ ఒరిజినల్ ఫోటో మీ డివైస్‌లోనే ఉంటుంది.",upload:"వెడ్డింగ్ ఫోటో అప్‌లోడ్",style:"ఫోటో స్టైల్",format:"డౌన్‌లోడ్ ఫార్మాట్",names:"జంట పేర్లు / టైటిల్",date:"పెళ్లి తేదీ / సందేశం",apply:"స్టైల్ అప్లై చేయండి",download:"ప్రివ్యూ డౌన్‌లోడ్",disclaimer:"గమనిక: ఇది ఫిల్టర్లు, టెక్స్ట్‌తో పనిచేసే ఉచిత బ్రౌజర్ ఎడిటర్. నిజమైన AI జనరేషన్ ఇంకా కనెక్ట్ కాలేదు. తర్వాత పరిమిత క్రెడిట్లతో జోడిస్తాం.",preview:"లైవ్ ప్రివ్యూ",previewHint:"మీ ఫోటో ఇక్కడ కనిపిస్తుంది.",built:"వెడ్డింగ్ కమ్యూనిటీ కోసం",prosTitle:"ఒకే క్రియేటివ్ స్టూడియో. ఎన్నో అవకాశాలు.",prosIntro:"పెళ్లి చేసుకునే జంటల నుంచి ప్రొఫెషనల్ స్టూడియోల వరకు అందరికీ.",couples:"జంటల కోసం",couplesDesc:"ఆహ్వాన డిజైన్లు తయారుచేసి, పేర్లు, తేదీలు మార్చి షేర్ చేయండి.",photogs:"ఫోటోగ్రాఫర్ల కోసం",photogsDesc:"పోర్ట్రెయిట్ స్టైల్స్, క్లయింట్ ప్రివ్యూలు, డిజైన్ ఐడియాలు.",videogs:"వీడియోగ్రాఫర్ల కోసం",videogsDesc:"టీజర్ ఐడియాలు, టైటిల్ కార్డులు, సోషల్ వీడియో కాన్సెప్ట్లు.",footer:"జంటలు, ఫోటోగ్రాఫర్లు, వీడియోగ్రాఫర్లు, క్రియేటర్ల కోసం."}
+};
+const input=document.getElementById('photoInput'), img=document.getElementById('previewImg'), placeholder=document.getElementById('placeholder'), apply=document.getElementById('apply'), download=document.getElementById('download');
+let original=null, currentUrl=null;
+input.addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(!f.type.startsWith('image/')){alert('Please choose an image file.');return;}if(currentUrl)URL.revokeObjectURL(currentUrl);currentUrl=URL.createObjectURL(f);original=new Image();original.onload=()=>{img.src=currentUrl;img.style.display='block';placeholder.style.display='none';apply.disabled=false;render();};original.src=currentUrl;});
+function filterValue(){const s=document.getElementById('style').value;return s==='warm'?'sepia(.18) saturate(1.18) contrast(1.04)':s==='soft'?'brightness(1.06) saturate(.82) contrast(.94)':s==='mono'?'grayscale(1) contrast(1.12)':'saturate(.9) contrast(1.08)';}
+function render(){if(!original)return;img.style.filter=filterValue();const a=document.getElementById('names').value.trim(),b=document.getElementById('date').value.trim();document.getElementById('overlay').innerHTML=(a?escapeHtml(a):'')+(b?'<div style="font:12px system-ui;letter-spacing:1px;margin-top:7px">'+escapeHtml(b)+'</div>':'');download.disabled=false;}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+apply.addEventListener('click',render);
+['style','names','date'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+download.addEventListener('click',()=>{if(!original)return;const w=original.naturalWidth,h=original.naturalHeight,canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d'),s=document.getElementById('style').value;ctx.filter=s==='warm'?'sepia(.18) saturate(1.18) contrast(1.04)':s==='soft'?'brightness(1.06) saturate(.82) contrast(.94)':s==='mono'?'grayscale(1) contrast(1.12)':'saturate(.9) contrast(1.08)';ctx.drawImage(original,0,0,w,h);ctx.filter='none';const title=document.getElementById('names').value.trim(),date=document.getElementById('date').value.trim();if(title||date){const scale=Math.max(1,w/900);ctx.textAlign='center';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=12*scale;ctx.fillStyle='#fff';ctx.font=`${Math.round(34*scale)}px Georgia`;ctx.fillText(title,w/2,h*.88,w*.9);ctx.font=`${Math.round(15*scale)}px Arial`;ctx.fillText(date,w/2,h*.88+27*scale,w*.9);}const mime=document.getElementById('format').value;const link=document.createElement('a');link.download='wedding-ai-studio-preview.'+(mime==='image/png'?'png':'jpg');link.href=canvas.toDataURL(mime,.94);link.click();});
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('language').addEventListener('change',e=>{const t=translations[e.target.value]||translations.en;document.querySelectorAll('[data-i]').forEach(el=>{const k=el.dataset.i;if(t[k])el.textContent=t[k];});document.documentElement.lang=e.target.value;});
+</script>
+</body></html>
