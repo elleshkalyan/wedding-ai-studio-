@@ -1,107 +1,89 @@
-
 <!DOCTYPE html>
-<html lang="en">elleshkalyan.github.io
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080808">
 <title>VIVAAHORA | Cinematic Invitations</title>
 <style>
+:root{--bg:#070707;--panel:#111;--gold:#e8c77f;--muted:#aaa}
 *{box-sizing:border-box}
-body{margin:0;background:#080808;color:#fff;font-family:Arial,sans-serif}
-header{padding:18px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #806637;position:sticky;top:0;background:#080808;z-index:5}
-.logo{font: bold 25px Georgia;color:#e8c77f;letter-spacing:3px}
-nav a{color:#ddd;text-decoration:none;margin:0 8px;font-size:13px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
+header{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid #5c4829;position:sticky;top:0;background:rgba(7,7,7,.96);z-index:5}
+.logo{font:bold 25px Georgia,serif;color:var(--gold);letter-spacing:3px;white-space:nowrap}
+nav{display:flex;gap:18px}
+nav a{color:#eee;text-decoration:none;font-size:14px}
+nav a:hover{color:var(--gold)}
+.hero{text-align:center;padding:58px 20px 42px;background:radial-gradient(ellipse at center top,#392b18 0%,#15100a 35%,#070707 75%)}
+.tag{color:var(--gold);letter-spacing:3px;font-size:11px}
+.hero h1{font:clamp(38px,8vw,68px) Georgia,serif;color:#f4d99e;margin:16px 0}
+.hero p{color:#ccc;line-height:1.7;max-width:560px;margin:12px auto 22px}
 .btn{background:linear-gradient(120deg,#f6dfaa,#b38a40);color:#160f05;border:0;border-radius:30px;padding:13px 22px;font-weight:bold;cursor:pointer}
-.hero{text-align:center;padding:85px 20px 75px;background:radial-gradient(ellipse at center,#47341b,#080808 70%)}
-.tag{color:#e8c77f;letter-spacing:4px;font-size:12px}
-.hero h1{font:clamp(40px,8vw,70px) Georgia;color:#f4d99e;margin:20px 0}
-.hero p{color:#ccc;line-height:1.8;max-width:550px;margin:15px auto 25px}
-section{padding:45px 5%}
-.heading{text-align:center;color:#e8c77f;font:36px Georgia;margin-bottom:10px}
-.sub{text-align:center;color:#aaa;margin-bottom:30px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.card{background:#171512;border:1px solid #69502d;border-radius:15px;overflow:hidden}
-.art{height:155px;display:flex;justify-content:center;align-items:center;font-size:65px;background:radial-gradient(circle,#75552a,#21170e 75%)}
-.card h3{margin:14px 12px 5px;font-size:17px}
-.card p{margin:5px 12px 15px;color:#aaa;font-size:12px}
-.card button{margin:0 12px 15px}
-.formbox{max-width:650px;margin:auto;background:#171512;padding:25px;border:1px solid #8d6a35;border-radius:18px}
-label{display:block;color:#e8c77f;margin:16px 0 7px}
+section{padding:34px 5%}
+.heading{text-align:center;color:var(--gold);font:clamp(28px,5vw,36px) Georgia,serif;margin:0 0 9px}
+.sub{text-align:center;color:var(--muted);margin:0 0 26px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1050px;margin:auto}
+.card{min-width:0;cursor:pointer}
+.card-media{position:relative;overflow:hidden;border-radius:17px;background:#19140d;aspect-ratio:4/5;border:1px solid #49391f}
+.card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
+.card:hover img{transform:scale(1.045)}
+.card h3{font-size:17px;margin:12px 3px 5px}
+.card p{color:#aaa;font-size:12px;margin:0 3px 13px}
+.card .select{margin-left:3px;padding:10px 19px;font-size:12px}
+.formbox{max-width:650px;margin:auto;background:#14120f;padding:24px;border:1px solid #806137;border-radius:18px}
+label{display:block;color:var(--gold);margin:16px 0 7px;font-size:14px}
 input,select{width:100%;padding:13px;border-radius:8px;border:1px solid #70552e;background:#0c0c0c;color:white}
 .preview{margin-top:20px;padding:20px;border:1px dashed #b28b4c;border-radius:12px;text-align:center}
-footer{text-align:center;padding:30px;color:#aaa;border-top:1px solid #554326}
-@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}.art{height:210px}}
+#photoPreview{display:none;max-width:100%;max-height:250px;border-radius:10px;margin-top:12px}
+footer{text-align:center;padding:28px;color:#aaa;border-top:1px solid #554326}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.hero{padding:75px 20px 60px}}
+@media(max-width:420px){header{padding:14px 4%}.logo{font-size:20px;letter-spacing:2px}nav{gap:10px}nav a{font-size:12px}.grid{gap:13px}.card h3{font-size:15px}}
 </style>
 </head>
 <body>
 <header>
 <div class="logo">VIVAAHORA</div>
-<nav>
-<a href="#home">Home</a>
-<a href="#categories">Categories</a>
-<a href="#create">Create</a>
-</nav>
+<nav><a href="#home">Home</a><a href="#categories">Categories</a><a href="#create">Create</a></nav>
 </header>
 
 <section class="hero" id="home">
-<div class="tag">PREMIUM 3D CINEMATIC INVITATIONS</div>
+<div class="tag">PREMIUM CINEMATIC INVITATIONS</div>
 <h1>Moments Made<br>Magnificent.</h1>
-<p>Turn your special occasions into unforgettable cinematic video invitations.</p>
-<button class="btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">EXPLORE TEMPLATES</button>
+<p>Beautiful invitations for your most memorable celebrations. Choose a collection and create your personal invitation.</p>
+<button class="btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">EXPLORE INVITATIONS</button>
 </section>
 
 <section id="categories">
-<h2 class="heading">Our Collections</h2>
-<p class="sub">Choose your special occasion</p>
+<h2 class="heading">Explore Categories</h2>
+<p class="sub">Choose an occasion to begin</p>
 <div class="grid" id="cards"></div>
 </section>
 
 <section id="create">
 <h2 class="heading">Create Your Invitation</h2>
-<p class="sub">Personalize your invitation details</p>
+<p class="sub">Add your event details to see a personal preview</p>
 <div class="formbox">
 <label>Selected Category</label>
 <select id="category">
-<option>Wedding</option>
-<option>Birthday</option>
-<option>Gruhapravesham</option>
-<option>Engagement</option>
-<option>Baby Shower</option>
-<option>Half Saree</option>
-<option>Reception</option>
-<option>Naming Ceremony</option>
-<option>Admissions</option>
-<option>Festivals</option>
-<option>Anniversary</option>
-<option>Other Events</option>
+<option>Wedding</option><option>Birthday</option><option>Gruhapravesham</option><option>Engagement</option><option>Baby Shower</option><option>Half Saree</option><option>Reception</option><option>Naming Ceremony</option><option>Anniversary</option><option>Haldi & Mehendi</option><option>Other Events</option>
 </select>
-
 <label>Your Name / Names</label>
 <input id="names" placeholder="Enter names">
-
 <label>Event Date</label>
 <input id="date" type="date">
-
 <label>Event Time</label>
 <input id="time" type="time">
-
 <label>Venue / Address</label>
 <input id="venue" placeholder="Enter event location">
-
-<label>Upload Original Photo</label>
+<label>Upload Photo</label>
 <input id="photo" type="file" accept="image/*">
-
 <label>Video Format</label>
-<select id="format">
-<option>9:16 - Reels / WhatsApp Status</option>
-<option>16:9 - YouTube / TV</option>
-</select>
-
+<select id="format"><option>9:16 - Reels / WhatsApp Status</option><option>16:9 - YouTube / TV</option></select>
 <div class="preview">
 <h3 style="color:#e8c77f">Invitation Preview</h3>
-<p id="result">Your invitation details appear here.</p>
-<img id="photoPreview" style="display:none;max-width:100%;max-height:250px;border-radius:10px">
+<p id="result">Your invitation details will appear here.</p>
+<img id="photoPreview" alt="Uploaded invitation photo">
 </div>
 <br>
 <button class="btn" style="width:100%" onclick="makePreview()">UPDATE PREVIEW</button>
@@ -110,48 +92,44 @@ footer{text-align:center;padding:30px;color:#aaa;border-top:1px solid #554326}
 
 <footer>
 <div class="logo">VIVAAHORA</div>
-<p>Every Celebration Deserves a Cinematic Invitation.</p>
+<p>Every Celebration Deserves a Beautiful Invitation.</p>
 <p>© 2026 VIVAAHORA. All Rights Reserved.</p>
 </footer>
 
 <script>
 const events=[
-["Wedding","💍","3D Royal Cinematic"],
-["Birthday","🎂","Kids, Adults, Surprise"],
-["Gruhapravesham","🏡","Traditional & Luxury"],
-["Engagement","💑","Romantic Cinematic"],
-["Baby Shower","🍼","Seemantham, Godh Bharai"],
-["Half Saree","🌸","Traditional Celebrations"],
-["Reception","🥂","Grand Royal Invitations"],
-["Naming Ceremony","👶","Beautiful Baby Events"],
-["Admissions","🎓","School & College"],
-["Festivals","🪔","Indian Festivals"],
-["Anniversary","❤️","Love & Togetherness"],
-["Other Events","✨","All Special Occasions"]
+{name:"Wedding Invitations",value:"Wedding",desc:"3D, Royal, Cinematic",img:"https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85"},
+{name:"Birthday Invitations",value:"Birthday",desc:"Kids, Adults, Surprise",img:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1000&q=85"},
+{name:"Gruhapravesham",value:"Gruhapravesham",desc:"Traditional Housewarming",img:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"},
+{name:"Engagement",value:"Engagement",desc:"Romantic Cinematic",img:"https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85"},
+{name:"Baby Shower",value:"Baby Shower",desc:"Seemantham, Godh Bharai",img:"https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1000&q=85"},
+{name:"Half Saree",value:"Half Saree",desc:"Traditional Celebrations",img:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85"},
+{name:"Reception",value:"Reception",desc:"Grand Royal Invitations",img:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85"},
+{name:"Naming Ceremony",value:"Naming Ceremony",desc:"A warm welcome for baby",img:"https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?auto=format&fit=crop&w=1000&q=85"},
+{name:"Anniversary",value:"Anniversary",desc:"Love & Togetherness",img:"https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1000&q=85"},
+{name:"Haldi & Mehendi",value:"Haldi & Mehendi",desc:"Colourful pre-wedding events",img:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85"}
 ];
 
 const cards=document.getElementById("cards");
 events.forEach(e=>{
-const card=document.createElement("div");
+const card=document.createElement("article");
 card.className="card";
-card.innerHTML=`<div class="art">${e[1]}</div>
-<h3>${e[0]}</h3><p>${e[2]}</p>
-<button class="btn">SELECT</button>`;
-card.querySelector("button").onclick=()=>{
-document.getElementById("category").value=e[0];
+card.innerHTML=`<div class="card-media"><img src="${e.img}" alt="${e.name}" loading="lazy"></div><h3>${e.name}</h3><p>${e.desc}</p><button class="btn select" type="button">SELECT</button>`;
+card.addEventListener("click",()=>{
+document.getElementById("category").value=e.value;
 document.getElementById("create").scrollIntoView({behavior:"smooth"});
-};
+});
 cards.appendChild(card);
 });
 
 function makePreview(){
-const names=document.getElementById("names").value;
+const names=document.getElementById("names").value.trim();
 const date=document.getElementById("date").value;
-const venue=document.getElementById("venue").value;
+const time=document.getElementById("time").value;
+const venue=document.getElementById("venue").value.trim();
 const category=document.getElementById("category").value;
 const format=document.getElementById("format").value;
-document.getElementById("result").innerText=
-category+" | "+names+" | "+date+" | "+venue+" | "+format;
+document.getElementById("result").innerText=[category,names,date,time,venue,format].filter(Boolean).join(" | ")||"Please enter your invitation details.";
 }
 
 document.getElementById("photo").addEventListener("change",function(){
